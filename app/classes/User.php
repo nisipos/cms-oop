@@ -8,6 +8,7 @@ class User extends QueryBuilder
     private $firstname;
     private $lastname;
     private $email;
+    private $errorMessage;
 
     public function setUserID($id)
     {
@@ -29,10 +30,56 @@ class User extends QueryBuilder
         $this->email = trim($email);
     }
 
+    public function setErrorMessage($errorMessage)
+    {
+        $this->errorMessage = $errorMessage;
+    }
+
+    public function getErrorMessage()
+    {
+       return $this->errorMessage;
+    }
+
+    public function all($where_clause = null)
+    {
+        $query = 'SELECT * FROM users';
+    
+        if ($where_clause != null) {
+            $x = 0;
+            $parameters = [];
+            foreach ($where_clause as $key => $where) {
+            if ($x === 0) {
+                $query .= ' WHERE ';
+            } elseif ($x < 0) {
+                $query .= ' AND ';
+            }
+    
+            $query .= $key.' = ? ';
+    
+            array_push($parameters, $where);
+            }
+            $this->setParams($parameters);
+        }
+        $this->setQuery($query);
+        return $this->getAll();
+    }
+
     public function add()
     {
-        $this->setQuery('INSERT INTO cms (firstname, lastname, email) VALUES (?, ?, ?)');
+        if ($this->isNameExist()) {
+            $this->setErrorMessage('Name already exists!');
+            return false;
+        }
+        $this->setQuery('INSERT INTO users (firstname, lastname, email) VALUES (?, ?, ?)');
         $this->setParams([$this->firstname, $this->lastname, $this->email]);
         return $this->executeQuery();
+    }
+
+    public function isNameExist()
+    {
+        $this->setQuery('SELECT id FROM users WHERE firstname = ? AND lastname = ?');
+        $this->setParams([$this->firstname, $this->lastname]);
+        $this->executeQuery();
+        return $this->getRowCount() > 0 ? true : false;
     }
 }

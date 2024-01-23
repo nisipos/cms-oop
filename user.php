@@ -16,11 +16,18 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Management</div>
-                        <a href="user.php" class="nav-link active">
-                            <div class="sb-nav-link-icon"><i class="fa-regular fa-user"></i></div>
-                            User
+                        <div class="sb-sidenav-menu-heading">System</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fa-regular fa-users"></i></div>
+                            Users
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link active" href="user.php">All User</a>
+                                <a class="nav-link" href="#">Deactivated Users</a>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -50,6 +57,7 @@
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Date Created</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
