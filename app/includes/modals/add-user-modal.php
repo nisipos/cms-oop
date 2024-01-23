@@ -8,14 +8,14 @@
       </div>
       <form id="userForm">
         <div class="modal-body">
-          <!-- <div class="alert alert-primary" role="alert" id="userCreationNote">
+          <div class="alert alert-primary" role="alert" id="userCreationNote">
             <div class="form-text">
               Username is automatically created.
               <i><strong> format:</strong> [f][lastname] 
                   <br> e.g. <strong>name:</strong> John Doe - <strong>username:</strong> jdoe
               </i>
             </div>
-          </div> -->
+          </div>
           <div class="mb-3">
             <label for="firstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="firstNameInput" name="firstName" placeholder="First Name" required>

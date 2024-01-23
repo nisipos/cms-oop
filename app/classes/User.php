@@ -40,6 +40,13 @@ class User extends QueryBuilder
        return $this->errorMessage;
     }
 
+    public function show($id)
+    {
+        $this->setQuery('SELECT * FROM users WHERE id = ?');
+        $this->setParams([$id]);
+        return $this->get();
+    }
+
     public function all($where_clause = null)
     {
         $query = 'SELECT * FROM users';
@@ -72,6 +79,13 @@ class User extends QueryBuilder
         }
         $this->setQuery('INSERT INTO users (firstname, lastname, email) VALUES (?, ?, ?)');
         $this->setParams([$this->firstname, $this->lastname, $this->email]);
+        return $this->executeQuery();
+    }
+
+    public function update()
+    {
+        $this->setQuery('UPDATE users SET firstname = ?, lastname = ?, email = ? WHERE id = ?');
+        $this->setParams([$this->firstname, $this->lastname, $this->email, $this->userId]);
         return $this->executeQuery();
     }
 
