@@ -11,6 +11,6 @@ if ($_POST) {
     if ($user->add()) {
         exit(json_encode(['success' => true, 'message' => 'Successfully created user.']));
     }
-    exit(json_encode(['success' => false, 'message' => 'Oops.. Something went wrong!']));
+      exit(json_encode(['success' => false, 'message' => $user->getErrorMessage()]));
 }
 echo json_encode(['status' => false, 'message' => 'Invalid access!']);
